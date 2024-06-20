@@ -1,21 +1,28 @@
-import { includeUser } from "./components/include-user";
-import { logProps } from "./components/log-props";
-import { UserInfoForm } from "./components/user-form";
-import { UserInfo } from "./components/user-info";
+// import { GreenSmallButton, RedButton } from "./components/composition";
+import { RedButton, RedSmallButton } from "./components/partial";
+import { Recursive } from "./components/recursive";
 
-
-// const UsertInfoWrapper = logProps(UserInfo);
-
-const UserInfoWithLoader = includeUser(UserInfo, "3");
+const myNestedObject = {
+  key1: "value1",
+  key2: {
+    innerKey1: "innerValue1",
+    innerKey2: {
+      innerInnerKey1: "innerInnerValue1",
+      innerInnerKey2: "innerInnerValue2",
+    },
+  },
+  key3: "value3",
+};
 
 function App() {
   return (
     <>
-      {/* <UsertInfoWrapper tst={"test"} b={"I am be"} c={22} /> */}
+      <Recursive data={myNestedObject} />
 
-      <UserInfoWithLoader/>
+      <RedButton text={"Red button"} />
+      <RedSmallButton text={"Red small button"} />
 
-      <UserInfoForm/>
+
     </>
   );
 }
