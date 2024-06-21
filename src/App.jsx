@@ -1,32 +1,16 @@
-import axios from "axios";
-import { BookInfo } from "./components/book-info";
-import  DataSource  from "./components/data-source";
-import { UserInfo } from "./components/user-info";
+import React from 'react'
+import { Child } from './child'
+import { ErrorBoundary } from './components/error-boundry'
 
-const fetchData = async (url) => {
-  const response = await axios.get(url);
-  return response.data;
-};
-
-const getDataFromLocalStorage = (key) => () => {
-  return localStorage.getItem(key);
-};
-
-const Message = ({ msg }) => <h1>{msg}</h1>;
-
-function App() {
-  return (
-    <>
-      <DataSource getData={() => fetchData("/users/1")} resourceName={"user"}>
-        <UserInfo />
-      </DataSource>
-
-      <DataSource getData={() => getDataFromLocalStorage("test")} resourceName={"msg"}>
-        <Message />
-      </DataSource>
-
-    </>
-  );
+const App = () => {
+  return (  
+    <div>
+      <h1>Parent</h1>
+      <ErrorBoundary fallback={<h1 style={{color:"red"}}>Error in Child Component+</h1>}>
+      <Child/>
+      </ErrorBoundary>
+    </div>
+  )
 }
 
-export default App;
+export default App
